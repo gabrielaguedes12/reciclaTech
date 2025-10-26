@@ -15,11 +15,10 @@
 </head>
 
 <body>
-    <!--cabeçalho-->
     <header class="cabecalho">
 
         <div class="logo-container">
-            <img src="img/logo.png" alt="logo">
+            <img src="img/logo.png" alt="logo" class="logo-icon">
             <h1 class="titulo-site">ReciclaTech</h1>
         </div>
 
@@ -33,7 +32,6 @@
         </nav>
     </header>
 
-    <!--home-->
     <main>
         <section class="inicio">
             <div class="texto-inicio">
@@ -52,10 +50,9 @@
                     </button>
                 </div>
             </div>
-            <img src="img/reciclagem.png" alt="reciclagem">
+            <img src="img/reciclagem.png" alt="reciclagem" class="imagem-reciclagem">
         </section>
 
-        <!--container porcentagem-->
         <section class="estatistica">
             <div class="item-estatistica">
                 <img src="img/2.5k+.png" alt="eletronicos">
@@ -71,127 +68,121 @@
                 <img src="img/usuario.png" alt="usuarios">
                 <p>Satisfação dos usuários</p>
             </div>
-            </div>
         </section>
 
-        <!--como funciona-->
         <section class="como-funciona">
             <h2>Como funciona?</h2>
             <p>É mais fácil que trocar a pilha do controle!</p>
 
-            <div class="para-doadores">
-                <h3>Para Doadores</h3>
-                <p>Transforme seu "lixo eletrônico" no tesouro de alguém</p>
-                <div class="passos">
-                    <div class="passo">
-                        <img src="icons/1verde.png" alt="numeracao">
-                        <h4>Cadastre seu eletrônico</h4>
-                        <p>Tire umas fotos, descreva o estado e pronto!</p>
-                    </div>
+            <div class="containers-funciona">
+                <div class="para-doadores">
+                    <h3><img src="icons/icon_Doador.png" alt="Icone Presente">Para Doadores</h3>
+                    <p class="descricao">Transforme seu "lixo eletrônico" no tesouro de alguém</p>
+                    <div class="passos">
+                        <div class="passo">
+                            <img src="icons/1verde.png" alt="Passo 1">
+                            <p class="titulo-passo">Cadastre seu eletrônico</p>
+                            <p class="texto-passo">Tire umas fotos, descreva o estado e pronto!</p>
+                        </div>
 
-                    <div>
-                        <img src="icons/2verde.png" alt="numeracao">
-                        <h4>Aguarde o Match</h4>
-                        <p>Alguém vai se interessar pelo seu item</p>
-                    </div>
+                        <div class="passo">
+                            <img src="icons/2verde.png" alt="Passo 2">
+                            <p class="titulo-passo">Aguarde o match</p>
+                            <p class="texto-passo">Alguém vai se interessar pelo seu item</p>
+                        </div>
 
-                    <div>
-                        <img src="icons/3verde.png" alt="numeracao">
-                        <h4>Combine a entrega</h4>
-                        <p>Vocês decidem como fazer a entrega</p>
+                        <div class="passo">
+                            <img src="icons/3verde.png" alt="Passo 3">
+                            <p class="titulo-passo">Combine a entrega</p>
+                            <p class="texto-passo">Vocês decidem como fazer a entrega</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="para-adquirente">
-                <h3>Para Adquirentes</h3>
-                <p>Encontre o eletrônico dos seus sonhos de graça</p>
-                <div class="passos">
-                    <div class="passo">
-                        <img src="icons/1azul.png" alt="numeracao">
-                        <p>Explore os itens</p>
-                        <p>Navegue pelos eletrônicos disponíveis</p>
-                    </div>
+                <div class="para-adquirente">
+                     <h3><img src="icons/coracaoAzul.png" alt="Icone Coracao">Para Adquirentes</h3>
+                    <p class="descricao">Encontre o eletrônico dos seus sonhos de graça</p>
+                    <div class="passos">
+                        <div class="passo">
+                            <img src="icons/1azul.png" alt="Passo 1">
+                            <p class="titulo-passo">Explore os itens</p>
+                            <p class="texto-passo">Navegue pelos eletrônicos disponíveis</p>
+                        </div>
 
-                    <div class="passo">
-                        <img src="icons/2azul.png" alt="numeracao">
-                        <p>Demonstre interesse</p>
-                        <p>Clique em "Tenho interesse" no item</p>
-                    </div>
+                        <div class="passo">
+                            <img src="icons/2azul.png" alt="Passo 2">
+                            <p class="titulo-passo">Demonstre interesse</p>
+                            <p class="texto-passo">Clique em "Tenho interesse" no item</p>
+                        </div>
 
-                    <div>
-                        <img src="icons/3azul.png" alt="numeracao">
-                        <p>Receba seu novo gadget</p>
-                        <p>Combine com o doador e seja feliz!</p>
+                        <div class="passo">
+                            <img src="icons/3azul.png" alt="Passo 3">
+                            <p class="titulo-passo">Receba seu novo gadget</p>
+                            <p class="texto-passo">Combine com o doador e seja feliz!</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!--produtos-->
-        <section>
-            <h2>Produtos disponiveis</h2>
-            <p>Categoria mais populares</p>
+        <section class="produtos">
+            <h2>Produtos disponíveis</h2>
+            <p>Categorias mais populares</p>
             <div class="lista-produtos">
                 <div class="cartao-produto">
                     <img src="img/fone.png" alt="fone">
-                    <h2>Fones</h2>
+                    <h3>Fones</h3>
                     <p>Fones em ótimo estado, prontos para uso.</p>
-                    <button class="botao-adquirir">Quero adquirir</button>
+                    <button class="botao-adquirir-produto">Quero adquirir</button>
                 </div>
 
                 <div class="cartao-produto">
                     <img src="img/Notebook.png" alt="notebook">
-                    <h2>Notebooks</h2>
+                    <h3>Notebooks</h3>
                     <p>Notebooks funcionando direitinho, prontos para você usar.</p>
-                    <button>Quero adquirir</button>
+                    <button class="botao-adquirir-produto">Quero adquirir</button>
                 </div>
 
                 <div class="cartao-produto">
                     <img src="img/celular.png" alt="celular">
-                    <h2>Smartphones</h2>
+                    <h3>Smartphones</h3>
                     <p>Celulares em ótimo estado, prontos para uma nova jornada.</p>
-                    <button>Quero adquirir</button>
+                    <button class="botao-adquirir-produto">Quero adquirir</button>
                 </div>
             </div>
         </section>
 
-        <!--comentarios-->
         <section class="depoimentos">
             <h2>O que o pessoal tá falando?</h2>
             <p>Histórias reais de quem já usou</p>
 
             <div class="lista-depoimentos">
                 <div class="cartao-depoimento">
-                    <img src="icons/star.png" alt="Avaliação com estrelas">
-                    <p>"Doei meu notebook antigo e em 2 dias já tinha alguém interessado! Ver a felicidade do estudante
-                        que recebeu não tem preço! 😊"</p>
-                    <img src="icons/Doadores.png" alt="Ícone de doador">
-                    <h4>João Santos</h4>
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Doei meu notebook antigo e em 2 dias já tinha alguém interessado! Ver a felicidade do estudante que recebeu não tem preço! 😊"</p>
+                    <img src="icons/Doadores.png" alt="Ícone de doador" class="icone-usuario">
+                    <h4 class="nome-usuario">João Santos</h4>
                     <p class="cargo">Doador</p>
                 </div>
 
                 <div class="cartao-depoimento">
-                    <img src="icons/star.png" alt="Avaliação com estrelas">
-                    <p>"Consegui um iPhone 12 em perfeito estado! A dona anterior cuidou super bem. Economizei uma grana
-                        e ainda ajudei o meio ambiente! 🌱"</p>
-                    <img src="icons/Adquirentes.png" alt="Ícone de adquirente">
-                    <h4>Maria Silva</h4>
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Consegui um iPhone 12 em perfeito estado! A dona anterior cuidou super bem. Economizei uma grana e ainda ajudei o meio ambiente! 🌱"</p>
+                    <img src="icons/Adquirentes.png" alt="Ícone de adquirente" class="icone-usuario">
+                    <h4 class="nome-usuario">Maria Silva</h4>
                     <p class="cargo">Adquirente</p>
                 </div>
 
                 <div class="cartao-depoimento">
-                    <img src="icons/star.png" alt="Avaliação com estrelas">
-                    <p>"Plataforma incrível! Já doei 3 itens e adquiri 2. A comunidade é super respeitosa e o processo é
-                        muito fácil! 👏"</p>
-                    <img src="icons/icon_userAtivo.png" alt="Ícone de usuário ativo">
-                    <h4>Ana Costa</h4>
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Plataforma incrível! Já doei 3 itens e adquiri 2. A comunidade é super respeitosa e o processo é muito fácil! 👏"</p>
+                    <img src="icons/icon_userAtivo.png" alt="Ícone de usuário ativo" class="icone-usuario">
+                    <h4 class="nome-usuario">Ana Costa</h4>
                     <p class="cargo">Usuária ativa</p>
                 </div>
             </div>
         </section>
 
-        <!--chamada-->
         <section class="chamada-final">
             <h2>Pronto para fazer a diferença?</h2>
             <p>Junte-se à nossa comunidade e ajude a criar um mundo mais sustentável, um eletrônico de cada vez!</p>
@@ -202,15 +193,15 @@
         </section>
     </main>
 
-    <!--rodapé-->
     <footer class="rodape">
         <div class="conteudo-rodape">
             <div class="sobre-sites">
-                <img src="img/logo.png" alt="logo">
-                <h3>ReciclaTech</h3>
+                <div class="logo-rodape">
+                    <img src="img/logo.png" alt="logo" class="logo-icon">
+                    <h3>ReciclaTech</h3>
+                </div>
                 <p>Conectando pessoas através da sustentabilidade e tecnologia.</p>
             </div>
-
 
             <div class="links-rapidos">
                 <h3>Links Rápidos</h3>

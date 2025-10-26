@@ -1,50 +1,65 @@
-// 1. Variáveis e Configurações (Settings)
-//-----------------------------------------
+// Variáveis de Cor (Extraídas do design componentizado)
 $font-principal: 'Karla', sans-serif;
 $font-titulo: 'Poppins', sans-serif;
-
-// Paleta de Cores
-$cor-titulo: #1F2937;          // Título
-$cor-subtitulo: #4B5563;        // Subtítulo
-$cor-fundo-principal: #F3F5F8;  // Fundo
-$cor-fundo-caixas: #F0FDF4;     // Fundo caixas (light mint)
-$cor-primaria: #16A34A;         // Botão primário / Contorno (Vibrant Green)
-$cor-primaria-hover: #10873a;
-$cor-secundaria: #2563EB;       // Cor - Círculo com Nº (Vibrant Blue)
-$cor-fundo-escuro: #1E293B;     // Rodapé/Footer
+$cor-titulo: #1F2937; // Título principal (quase preto)
+$cor-subtitulo: #4B5563; // Texto de parágrafo (cinza escuro)
+$cor-fundo-principal: #F3F5F8; // Fundo da página (cinza bem claro)
+$cor-fundo-caixas: #F0FDF4; // Fundo verde claro (Para Doadores/Chamada Final)
+$cor-primaria: #16A34A; // Verde principal (Botão primário)
+$cor-primaria-hover: #148f41; // Verde hover (aproximado)
+$cor-secundaria: #2563EB; // Azul principal (Cor/Contorno - Botão/Círculo com Nº)
+$cor-fundo-escuro: #1E293B; // Fundo do rodapé (azul escuro)
 $cor-branca: #FFFFFF;
 $cor-cinza-claro: rgba(0, 0, 0, 0.05);
+$cor-amarela-estrela: #FFC107;
 
+// Mixin para Botão Primário (Verde Sólido)
+@mixin botao-primario-style($padding: 0.75rem 1.5rem) {
+    cursor: pointer;
+    padding: $padding;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    font-family: $font-titulo;
+    border: none;
+    background-color: $cor-primaria;
+    color: $cor-branca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    &:hover {
+        background-color: $cor-primaria-hover; // Padrão hover do design
+    }
+}
 
-// 2. Mixins e Funções (Tools)
-//------------------------------
+// Mixin para Botão Secundário (Contorno Azul)
+@mixin botao-secundario-style($padding: 0.75rem 1.5rem) {
+    cursor: pointer;
+    padding: $padding;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-family: $font-titulo;
+    background-color: $cor-branca;
+    color: $cor-secundaria;
+    border: 2px solid $cor-secundaria; // Borda azul do design
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    &:hover {
+        background-color: rgba($cor-secundaria, 0.05);
+    }
+}
 
-// Mixin para centralizar o conteúdo em todas as seções
+// Mixin para Container Base (centralizar conteúdo)
 @mixin container-base {
     max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 1.5rem;
 }
 
-// Mixin para estilos de botão primário
-@mixin botao-primario-style {
-    cursor: pointer;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    font-family: $font-titulo;
-    border: none;
-    background-color: $cor-primaria;
-    color: $cor-branca;
-
-    &:hover {
-        background-color: $cor-primaria-hover;
-    }
-}
-
-// 3. Reset e Estilos Base (Generic & Base)
-//----------------------------------------
 * {
     margin: 0;
     padding: 0;
@@ -78,8 +93,29 @@ a {
     transition: color 0.3s;
 }
 
-button {
-    @include botao-primario-style; // Aplica o mixin base de botão
+// Estilos de Botão
+.botao-primario, .botao-comecar { @include botao-primario-style; }
+.botao-doar { 
+    @include botao-primario-style($padding: 1rem 2rem); 
+    img { filter: brightness(0) invert(1); width: 20px; height: 20px; } // Deixa o ícone branco
+}
+.botao-adquirir { 
+    @include botao-secundario-style($padding: 1rem 2rem); 
+    color: $cor-secundaria; 
+    border-color: $cor-secundaria;
+    img { width: 20px; height: 20px; } // Coração azul
+}
+.botao-adquirir-produto { 
+    @include botao-primario-style; 
+    width: 100%; 
+    border-radius: 0; 
+    padding: 1rem 1.5rem;
+}
+.botao-mais { 
+    @include botao-secundario-style($padding: 1rem 2rem); 
+    color: $cor-primaria; 
+    border-color: $cor-primaria;
+    &:hover { background-color: rgba($cor-primaria, 0.05); }
 }
 
 main {
@@ -91,10 +127,7 @@ main {
     }
 }
 
-// 4. Componentes (Components)
-//-----------------------------
-
-// Cabeçalho
+/* --- Cabeçalho --- */
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -102,246 +135,70 @@ main {
     padding: 1.5rem;
     background-color: $cor-branca;
     box-shadow: 0 2px 4px $cor-cinza-claro;
-
     .logo-container {
         display: flex;
         align-items: center;
-        img {
-            width: 32px;
-            height: 32px;
-            margin-right: 0.5rem;
-        }
-        .titulo-site {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: $cor-primaria;
-        }
+        .logo-icon { width: 32px; height: 32px; margin-right: 0.5rem; }
+        .titulo-site { font-size: 1.5rem; font-weight: 700; color: $cor-titulo; }
     }
-
     .menu-navegacao {
         display: flex;
         align-items: center;
-
         ul {
             list-style: none;
             display: flex;
             gap: 2rem;
             margin-right: 2rem;
-
             a {
                 color: $cor-titulo;
                 font-weight: 600;
-
-                &:hover {
-                    color: $cor-primaria;
-                }
+                &:hover { color: $cor-primaria; }
             }
         }
-        .botao-primario {
-            @include botao-primario-style;
-        }
     }
 }
 
-// Botões Específicos
-.botao-doar {
-    @include botao-primario-style;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    img {
-        width: 20px;
-        height: 20px;
-        margin: 0;
-    }
-}
-
-.botao-adquirir {
-    background-color: $cor-branca;
-    color: $cor-secundaria;
-    border: 2px solid $cor-secundaria;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    
-    &:hover {
-        background-color: $cor-fundo-caixas;
-    }
-
-    img {
-        width: 20px;
-        height: 20px;
-        margin: 0;
-    }
-}
-
-// Cartões de Depoimento
-.cartao-depoimento {
-    background-color: $cor-branca;
-    border-radius: 0.75rem;
-    padding: 2rem;
-    box-shadow: 0 4px 6px $cor-cinza-claro;
-    flex: 1;
-    max-width: 350px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    img[alt="Avaliação com estrelas"] {
-        width: 100px;
-        margin-bottom: 1rem;
-    }
-
-    p:first-of-type {
-        margin-bottom: 1.5rem;
-        font-style: italic;
-        color: $cor-titulo;
-    }
-
-    img:nth-of-type(2) { // Ícone de Doador/Adquirente
-        width: 32px;
-        height: 32px;
-        margin-bottom: 0.5rem;
-    }
-
-    h4 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-    }
-
-    .cargo {
-        font-size: 0.9rem;
-        color: $cor-subtitulo;
-    }
-}
-
-
-// Cartões de Produto
-.cartao-produto {
-    background-color: $cor-branca;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 6px $cor-cinza-claro;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    flex: 1;
-    max-width: 350px;
-    border: 2px solid transparent;
-    padding-bottom: 1.5rem;
-
-    &:hover {
-        border-color: $cor-primaria;
-        box-shadow: 0 10px 15px rgba(22, 163, 74, 0.1);
-    }
-
-    img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        margin-bottom: 1rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    p {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-        padding: 0 1rem;
-    }
-
-    button {
-        background-color: $cor-primaria;
-        color: $cor-branca;
-        border: none;
-        padding: 0.75rem 1.5rem;
-
-        &:hover {
-            background-color: $cor-primaria-hover;
-        }
-    }
-}
-
-
-// 5. Layouts (Layout)
-//---------------------
-
-// Seção Inicial (Hero)
+/* --- Seção Home (Início) --- */
 .inicio {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 4rem;
-
     .texto-inicio {
         max-width: 50%;
-
-        h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        p {
-            margin-bottom: 2.5rem;
-        }
-
-        .botao-inicio {
-            display: flex;
-            gap: 1rem;
-        }
+        h2 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        p { margin-bottom: 2.5rem; }
+        .botao-inicio { display: flex; gap: 1rem; }
     }
-
-    img {
+    .imagem-reciclagem {
         max-width: 40%;
         height: auto;
     }
 }
 
-// Estatísticas
+/* --- Seção Estatísticas --- */
 .estatistica {
     background-color: $cor-branca;
     display: flex;
     justify-content: space-around;
     border-top: 1px solid $cor-cinza-claro;
     border-bottom: 1px solid $cor-cinza-claro;
-
     .item-estatistica {
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        img {
-            max-width: 150px;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            font-size: 1.25rem;
-            color: $cor-subtitulo;
-            font-weight: 400;
-        }
+        img { max-width: 100px; margin-bottom: 0.5rem; } // Ajustado para as imagens de números
+        p { font-size: 1.25rem; color: $cor-subtitulo; font-weight: 400; }
     }
 }
 
-// Como Funciona
+/* --- Seção Como Funciona --- */
 .como-funciona {
     text-align: center;
+    > p { margin-bottom: 4rem; font-size: 1.25rem; color: $cor-subtitulo; }
 
-    > p {
-        margin-bottom: 4rem;
-        font-size: 1.25rem;
-        color: $cor-subtitulo;
-    }
-
-    > div {
+    .containers-funciona {
         display: flex;
         gap: 2rem;
         text-align: left;
@@ -351,7 +208,7 @@ main {
         flex: 1;
         padding: 2.5rem;
         border-radius: 1rem;
-        box-shadow: 0 10px 15px $cor-cinza-claro;
+        box-shadow: 0 4px 10px $cor-cinza-claro;
         
         h3 {
             font-size: 1.5rem;
@@ -359,141 +216,122 @@ main {
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
+            img { width: 28px; height: 28px; margin-right: 0.5rem; } // Ícone ao lado do título h3
         }
-
-        > p {
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            color: $cor-subtitulo;
-        }
-
-        .passos {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-    }
-
-    .para-doadores {
-        background-color: $cor-fundo-caixas;
-        border: 2px solid $cor-fundo-caixas;
+        .descricao { margin-bottom: 2rem; font-size: 1rem; color: $cor-subtitulo; }
+        .passos { display: flex; flex-direction: column; gap: 1.5rem; }
     }
     
-    .para-adquirente {
-        background-color: $cor-branca;
-        border: 2px solid $cor-fundo-principal;
+    // Cores de fundo específicas do design
+    .para-doadores { background-color: $cor-fundo-caixas; } // Verde Claro
+    .para-adquirente { background-color: $cor-branca; } // Branco
 
-        /* Override para o Adquirente que usa <p> como título */
-        .passo p:nth-of-type(1) { 
-            color: $cor-titulo;
-        }
-    }
-
+    // Layout para cada passo
     .passo {
         display: grid;
-        grid-template-columns: 30px 1fr;
+        grid-template-columns: 35px 1fr; // Coluna para o ícone (35px) e o conteúdo
         grid-template-rows: auto auto;
         gap: 0 1rem;
-
-        img {
-            grid-row: 1 / 3;
-            align-self: flex-start;
-            width: 30px;
-            height: 30px;
-        }
+        align-items: flex-start;
         
-        h4, p:nth-of-type(1) { // Estilos para títulos dos passos
-            grid-column: 2 / 3;
-            grid-row: 1 / 2;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
+        img {
+            grid-row: 1 / 3; 
+            align-self: flex-start;
+            width: 35px;
+            height: 35px;
         }
-        p:nth-of-type(2), .para-doadores .passo p { // Estilos para descrição dos passos
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            font-size: 1rem;
-            margin-top: 0;
-        }
+        .titulo-passo { grid-column: 2 / 3; font-weight: 600; color: $cor-titulo; margin-top: 0; margin-bottom: 0.2rem; }
+        .texto-passo { grid-column: 2 / 3; font-size: 0.9rem; margin-top: 0; color: $cor-subtitulo; }
     }
 }
 
-// Produtos
-section:nth-of-type(3) { /* Selecionando a seção de Produtos */
+/* --- Seção Produtos Disponíveis --- */
+.produtos {
     text-align: center;
-    
-    > p {
-        margin-bottom: 3rem;
-        font-size: 1.25rem;
-        color: $cor-subtitulo;
-    }
-
+    > p { margin-bottom: 3rem; font-size: 1.25rem; color: $cor-subtitulo; }
     .lista-produtos {
         display: flex;
         gap: 2rem;
         justify-content: center;
+        flex-wrap: wrap;
+    }
+    .cartao-produto {
+        background-color: $cor-branca;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        text-align: center;
+        box-shadow: 0 4px 6px $cor-cinza-claro;
+        flex: 1;
+        max-width: 350px;
+        border: 2px solid $cor-primaria; // Borda verde sutil do design
+
+        img { width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 0.5rem; padding: 0 1.5rem; }
+        p { font-size: 1rem; margin-bottom: 1.5rem; padding: 0 1.5rem; }
+        .botao-adquirir-produto {
+            width: 100%; 
+            border-radius: 0; 
+        }
     }
 }
 
-// Depoimentos
+/* --- Seção Depoimentos --- */
 .depoimentos {
     text-align: center;
-
-    > p {
-        margin-bottom: 3rem;
-        font-size: 1.25rem;
-        color: $cor-subtitulo;
-    }
-
+    background-color: $cor-fundo-principal;
+    > p { margin-bottom: 3rem; font-size: 1.25rem; color: $cor-subtitulo; }
     .lista-depoimentos {
         display: flex;
         gap: 2rem;
         justify-content: center;
     }
+    .cartao-depoimento {
+        background-color: $cor-branca;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px $cor-cinza-claro;
+        flex: 1;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .estrelas {
+            color: $cor-amarela-estrela;
+            font-size: 1.5rem;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        .texto-depoimento {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: $cor-titulo;
+        }
+        .icone-usuario { width: 32px; height: 32px; margin-bottom: 0.5rem; margin-top: 1rem; }
+        .nome-usuario { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; color: $cor-titulo; }
+        .cargo { font-size: 0.9rem; color: $cor-subtitulo; }
+    }
 }
 
-// Chamada Final
+/* --- Seção Chamada Final --- */
 .chamada-final {
     text-align: center;
-    background-color: $cor-fundo-caixas;
+    background-color: $cor-fundo-caixas; // Fundo verde claro do design
     padding: 6rem 1.5rem;
-
-    h2 {
-        margin-bottom: 1rem;
-    }
-
-    p {
-        margin-bottom: 2rem;
-        font-size: 1.25rem;
-    }
-
+    h2 { margin-bottom: 1rem; }
+    p { margin-bottom: 2rem; font-size: 1.25rem; }
     .botao-final {
         display: flex;
         justify-content: center;
         gap: 1.5rem;
-
-        .botao-comecar {
-            padding: 1rem 2rem;
-        }
-
-        .botao-mais {
-            background-color: transparent;
-            color: $cor-primaria;
-            border: 2px solid $cor-primaria;
-            
-            &:hover {
-                background-color: rgba(22, 163, 74, 0.1);
-            }
-        }
     }
 }
 
-// Rodapé
+/* --- Rodapé --- */
 .rodape {
-    background-color: $cor-fundo-escuro;
+    background-color: $cor-fundo-escuro; // Azul escuro do design
     color: $cor-branca;
     padding: 4rem 1.5rem 1.5rem;
-
     .conteudo-rodape {
         max-width: 1200px;
         margin: 0 auto;
@@ -503,28 +341,25 @@ section:nth-of-type(3) { /* Selecionando a seção de Produtos */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding-bottom: 3rem;
         margin-bottom: 1.5rem;
-
-        .sobre-sites, .links-rapidos, .suporte, .redes-sociais {
-            flex: 1;
-            max-width: 25%;
-        }
-
-        h3 {
-            color: $cor-branca;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
+        
+        .sobre-sites, .links-rapidos, .suporte, .redes-sociais { flex: 1; max-width: 25%; }
+        
+        h3 { color: $cor-branca; font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; }
+        
         .sobre-sites {
-            h3 {
-                font-size: 1.5rem;
+            .logo-rodape {
+                display: flex;
+                align-items: center;
                 margin-bottom: 1rem;
+                .logo-icon { 
+                    width: 32px; 
+                    height: 32px; 
+                    margin-right: 0.5rem; 
+                    filter: brightness(0) invert(1); // Deixa o ícone branco
+                }
+                h3 { margin: 0; font-size: 1.5rem; }
             }
-            p {
-                font-size: 1rem;
-                color: rgba(255, 255, 255, 0.7);
-            }
+            p { font-size: 1rem; color: rgba(255, 255, 255, 0.7); }
         }
         
         .links-rapidos, .suporte {
@@ -535,43 +370,24 @@ section:nth-of-type(3) { /* Selecionando a seção de Produtos */
                     margin-bottom: 0.75rem;
                     color: rgba(255, 255, 255, 0.7);
                     font-size: 1rem;
-                    &:hover {
-                        color: $cor-primaria;
-                    }
+                    &:hover { color: $cor-primaria; }
                 }
             }
         }
         
         .redes-sociais {
-            p {
-                margin-bottom: 1.5rem;
-                color: rgba(255, 255, 255, 0.7);
-                font-size: 1rem;
-            }
+            p { margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.7); font-size: 1rem; }
             .icones-redes {
                 display: flex;
                 gap: 0.75rem;
                 img {
                     width: 36px;
                     height: 36px;
-                    border-radius: 50%;
                     cursor: pointer;
-                    padding: 8px;
-                    
-                    &[alt="facebook"] {
-                        background-color: #3b5998;
-                    }
-                    &[alt="email"] {
-                        background-color: #E4405F; 
-                    }
-                    &[alt="twitter"] {
-                        background-color: #00acee; 
-                    }
                 }
             }
         }
     }
-
     .autoria {
         text-align: center;
         font-size: 0.875rem;
@@ -580,96 +396,29 @@ section:nth-of-type(3) { /* Selecionando a seção de Produtos */
     }
 }
 
-// 6. Media Queries (Responsividade)
-//----------------------------------
+/* --- Media Queries (Responsividade) --- */
 @media (max-width: 1024px) {
-    .inicio {
-        flex-direction: column;
-        text-align: center;
-
-        .texto-inicio {
-            max-width: 100%;
-        }
-
-        img {
-            max-width: 80%;
-        }
-    }
-    
-    .como-funciona > div {
-        flex-direction: column;
-    }
-
-    .lista-produtos, .lista-depoimentos {
-        flex-wrap: wrap;
-    }
-    
-    .cartao-produto, .cartao-depoimento {
-        max-width: none;
-        width: 100%;
-    }
-    
-    .cartao-depoimento {
-        text-align: center;
-        align-items: center;
-    }
+    .inicio { flex-direction: column; text-align: center; .texto-inicio { max-width: 100%; } .imagem-reciclagem { max-width: 80%; } }
+    .como-funciona .containers-funciona { flex-direction: column; }
+    .lista-produtos, .lista-depoimentos { flex-wrap: wrap; }
+    .cartao-produto, .cartao-depoimento { max-width: 100%; }
 }
 
 @media (max-width: 768px) {
-    h2 {
-        font-size: 2rem;
-    }
-    
-    .inicio .texto-inicio h2 {
-        font-size: 2.5rem;
-    }
-
+    h2 { font-size: 2rem; }
+    .inicio .texto-inicio h2 { font-size: 2.5rem; }
     .cabecalho {
         flex-direction: column;
         gap: 1rem;
-
-        .menu-navegacao {
-            flex-direction: column;
-            gap: 1rem;
-            margin-right: 0;
-
-            ul {
-                flex-direction: column;
-                gap: 0.5rem;
-                margin-right: 0;
-                text-align: center;
-            }
-        }
+        .menu-navegacao { flex-direction: column; gap: 1rem; ul { flex-direction: column; gap: 0.5rem; margin-right: 0; } }
     }
-    
-    .estatistica {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .botao-inicio, .botao-final {
-        flex-direction: column;
-    }
-
+    .estatistica { flex-direction: column; gap: 2rem; }
+    .botao-inicio, .botao-final { flex-direction: column; }
     .rodape .conteudo-rodape {
         flex-wrap: wrap;
-        
-        .sobre-sites, .links-rapidos, .suporte, .redes-sociais {
-            max-width: 50%;
-            margin-bottom: 2rem;
-        }
-        
-        .sobre-sites {
-            max-width: 100%;
-            text-align: center;
-        }
-        
-        .redes-sociais {
-            text-align: center;
-            max-width: 100%;
-            .icones-redes {
-                justify-content: center;
-            }
-        }
+        > div { max-width: 50%; margin-bottom: 2rem; }
+        .sobre-sites, .redes-sociais { max-width: 100%; text-align: center; }
+        .redes-sociais .icones-redes { justify-content: center; }
+        .sobre-sites .logo-rodape { justify-content: center; }
     }
 }
