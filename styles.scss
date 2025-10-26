@@ -1,5 +1,675 @@
-*{
+// 1. Variáveis e Configurações (Settings)
+//-----------------------------------------
+$font-principal: 'Karla', sans-serif;
+$font-titulo: 'Poppins', sans-serif;
+
+// Paleta de Cores
+$cor-titulo: #1F2937;          // Título
+$cor-subtitulo: #4B5563;        // Subtítulo
+$cor-fundo-principal: #F3F5F8;  // Fundo
+$cor-fundo-caixas: #F0FDF4;     // Fundo caixas (light mint)
+$cor-primaria: #16A34A;         // Botão primário / Contorno (Vibrant Green)
+$cor-primaria-hover: #10873a;
+$cor-secundaria: #2563EB;       // Cor - Círculo com Nº (Vibrant Blue)
+$cor-fundo-escuro: #1E293B;     // Rodapé/Footer
+$cor-branca: #FFFFFF;
+$cor-cinza-claro: rgba(0, 0, 0, 0.05);
+
+
+// 2. Mixins e Funções (Tools)
+//------------------------------
+
+// Mixin para centralizar o conteúdo em todas as seções
+@mixin container-base {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+}
+
+// Mixin para estilos de botão primário
+@mixin botao-primario-style {
+    cursor: pointer;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-family: $font-titulo;
+    border: none;
+    background-color: $cor-primaria;
+    color: $cor-branca;
+
+    &:hover {
+        background-color: $cor-primaria-hover;
+    }
+}
+
+// 3. Reset e Estilos Base (Generic & Base)
+//----------------------------------------
+* {
+    margin: 0;
     padding: 0;
-    margin: 0;    
     box-sizing: border-box;
+}
+
+body {
+    font-family: $font-principal;
+    background-color: $cor-fundo-principal;
+    color: $cor-subtitulo;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-titulo;
+    color: $cor-titulo;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+button {
+    @include botao-primario-style; // Aplica o mixin base de botão
+}
+
+main {
+    > section:not(.estatistica, .chamada-final) {
+        @include container-base;
+    }
+    .estatistica, .chamada-final {
+        padding: 4rem 1.5rem;
+    }
+}
+
+// 4. Componentes (Components)
+//-----------------------------
+
+// Cabeçalho
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: $cor-branca;
+    box-shadow: 0 2px 4px $cor-cinza-claro;
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        img {
+            width: 32px;
+            height: 32px;
+            margin-right: 0.5rem;
+        }
+        .titulo-site {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $cor-primaria;
+        }
+    }
+
+    .menu-navegacao {
+        display: flex;
+        align-items: center;
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin-right: 2rem;
+
+            a {
+                color: $cor-titulo;
+                font-weight: 600;
+
+                &:hover {
+                    color: $cor-primaria;
+                }
+            }
+        }
+        .botao-primario {
+            @include botao-primario-style;
+        }
+    }
+}
+
+// Botões Específicos
+.botao-doar {
+    @include botao-primario-style;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    img {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+    }
+}
+
+.botao-adquirir {
+    background-color: $cor-branca;
+    color: $cor-secundaria;
+    border: 2px solid $cor-secundaria;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    
+    &:hover {
+        background-color: $cor-fundo-caixas;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+    }
+}
+
+// Cartões de Depoimento
+.cartao-depoimento {
+    background-color: $cor-branca;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px $cor-cinza-claro;
+    flex: 1;
+    max-width: 350px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    img[alt="Avaliação com estrelas"] {
+        width: 100px;
+        margin-bottom: 1rem;
+    }
+
+    p:first-of-type {
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        color: $cor-titulo;
+    }
+
+    img:nth-of-type(2) { // Ícone de Doador/Adquirente
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0.5rem;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .cargo {
+        font-size: 0.9rem;
+        color: $cor-subtitulo;
+    }
+}
+
+
+// Cartões de Produto
+.cartao-produto {
+    background-color: $cor-branca;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 6px $cor-cinza-claro;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    flex: 1;
+    max-width: 350px;
+    border: 2px solid transparent;
+    padding-bottom: 1.5rem;
+
+    &:hover {
+        border-color: $cor-primaria;
+        box-shadow: 0 10px 15px rgba(22, 163, 74, 0.1);
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    button {
+        background-color: $cor-primaria;
+        color: $cor-branca;
+        border: none;
+        padding: 0.75rem 1.5rem;
+
+        &:hover {
+            background-color: $cor-primaria-hover;
+        }
+    }
+}
+
+
+// 5. Layouts (Layout)
+//---------------------
+
+// Seção Inicial (Hero)
+.inicio {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+
+    .texto-inicio {
+        max-width: 50%;
+
+        h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 2.5rem;
+        }
+
+        .botao-inicio {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+
+    img {
+        max-width: 40%;
+        height: auto;
+    }
+}
+
+// Estatísticas
+.estatistica {
+    background-color: $cor-branca;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid $cor-cinza-claro;
+    border-bottom: 1px solid $cor-cinza-claro;
+
+    .item-estatistica {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            max-width: 150px;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            color: $cor-subtitulo;
+            font-weight: 400;
+        }
+    }
+}
+
+// Como Funciona
+.como-funciona {
+    text-align: center;
+
+    > p {
+        margin-bottom: 4rem;
+        font-size: 1.25rem;
+        color: $cor-subtitulo;
+    }
+
+    > div {
+        display: flex;
+        gap: 2rem;
+        text-align: left;
+    }
+
+    .para-doadores, .para-adquirente {
+        flex: 1;
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 15px $cor-cinza-claro;
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        > p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: $cor-subtitulo;
+        }
+
+        .passos {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+
+    .para-doadores {
+        background-color: $cor-fundo-caixas;
+        border: 2px solid $cor-fundo-caixas;
+    }
+    
+    .para-adquirente {
+        background-color: $cor-branca;
+        border: 2px solid $cor-fundo-principal;
+
+        /* Override para o Adquirente que usa <p> como título */
+        .passo p:nth-of-type(1) { 
+            color: $cor-titulo;
+        }
+    }
+
+    .passo {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        grid-template-rows: auto auto;
+        gap: 0 1rem;
+
+        img {
+            grid-row: 1 / 3;
+            align-self: flex-start;
+            width: 30px;
+            height: 30px;
+        }
+        
+        h4, p:nth-of-type(1) { // Estilos para títulos dos passos
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        p:nth-of-type(2), .para-doadores .passo p { // Estilos para descrição dos passos
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+    }
+}
+
+// Produtos
+section:nth-of-type(3) { /* Selecionando a seção de Produtos */
+    text-align: center;
+    
+    > p {
+        margin-bottom: 3rem;
+        font-size: 1.25rem;
+        color: $cor-subtitulo;
+    }
+
+    .lista-produtos {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+    }
+}
+
+// Depoimentos
+.depoimentos {
+    text-align: center;
+
+    > p {
+        margin-bottom: 3rem;
+        font-size: 1.25rem;
+        color: $cor-subtitulo;
+    }
+
+    .lista-depoimentos {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+    }
+}
+
+// Chamada Final
+.chamada-final {
+    text-align: center;
+    background-color: $cor-fundo-caixas;
+    padding: 6rem 1.5rem;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 2rem;
+        font-size: 1.25rem;
+    }
+
+    .botao-final {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+
+        .botao-comecar {
+            padding: 1rem 2rem;
+        }
+
+        .botao-mais {
+            background-color: transparent;
+            color: $cor-primaria;
+            border: 2px solid $cor-primaria;
+            
+            &:hover {
+                background-color: rgba(22, 163, 74, 0.1);
+            }
+        }
+    }
+}
+
+// Rodapé
+.rodape {
+    background-color: $cor-fundo-escuro;
+    color: $cor-branca;
+    padding: 4rem 1.5rem 1.5rem;
+
+    .conteudo-rodape {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 3rem;
+        margin-bottom: 1.5rem;
+
+        .sobre-sites, .links-rapidos, .suporte, .redes-sociais {
+            flex: 1;
+            max-width: 25%;
+        }
+
+        h3 {
+            color: $cor-branca;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-sites {
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            p {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+        
+        .links-rapidos, .suporte {
+            ul {
+                list-style: none;
+                a {
+                    display: block;
+                    margin-bottom: 0.75rem;
+                    color: rgba(255, 255, 255, 0.7);
+                    font-size: 1rem;
+                    &:hover {
+                        color: $cor-primaria;
+                    }
+                }
+            }
+        }
+        
+        .redes-sociais {
+            p {
+                margin-bottom: 1.5rem;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 1rem;
+            }
+            .icones-redes {
+                display: flex;
+                gap: 0.75rem;
+                img {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    padding: 8px;
+                    
+                    &[alt="facebook"] {
+                        background-color: #3b5998;
+                    }
+                    &[alt="email"] {
+                        background-color: #E4405F; 
+                    }
+                    &[alt="twitter"] {
+                        background-color: #00acee; 
+                    }
+                }
+            }
+        }
+    }
+
+    .autoria {
+        text-align: center;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.5);
+        padding-top: 1rem;
+    }
+}
+
+// 6. Media Queries (Responsividade)
+//----------------------------------
+@media (max-width: 1024px) {
+    .inicio {
+        flex-direction: column;
+        text-align: center;
+
+        .texto-inicio {
+            max-width: 100%;
+        }
+
+        img {
+            max-width: 80%;
+        }
+    }
+    
+    .como-funciona > div {
+        flex-direction: column;
+    }
+
+    .lista-produtos, .lista-depoimentos {
+        flex-wrap: wrap;
+    }
+    
+    .cartao-produto, .cartao-depoimento {
+        max-width: none;
+        width: 100%;
+    }
+    
+    .cartao-depoimento {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .inicio .texto-inicio h2 {
+        font-size: 2.5rem;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        gap: 1rem;
+
+        .menu-navegacao {
+            flex-direction: column;
+            gap: 1rem;
+            margin-right: 0;
+
+            ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+    }
+    
+    .estatistica {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .botao-inicio, .botao-final {
+        flex-direction: column;
+    }
+
+    .rodape .conteudo-rodape {
+        flex-wrap: wrap;
+        
+        .sobre-sites, .links-rapidos, .suporte, .redes-sociais {
+            max-width: 50%;
+            margin-bottom: 2rem;
+        }
+        
+        .sobre-sites {
+            max-width: 100%;
+            text-align: center;
+        }
+        
+        .redes-sociais {
+            text-align: center;
+            max-width: 100%;
+            .icones-redes {
+                justify-content: center;
+            }
+        }
+    }
 }
