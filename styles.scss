@@ -29,11 +29,11 @@ $cor-amarela-estrela: #FFC107;
     justify-content: center;
     gap: 0.5rem;
     &:hover {
-        background-color: $cor-primaria-hover; // Padrão hover do design
+        background-color: $cor-primaria-hover; 
     }
 }
 
-// Mixin para Botão Secundário (Contorno Azul)
+
 @mixin botao-secundario-style($padding: 0.75rem 1.5rem) {
     cursor: pointer;
     padding: $padding;
@@ -43,7 +43,7 @@ $cor-amarela-estrela: #FFC107;
     font-family: $font-titulo;
     background-color: $cor-branca;
     color: $cor-secundaria;
-    border: 2px solid $cor-secundaria; // Borda azul do design
+    border: 2px solid $cor-secundaria; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,7 +53,7 @@ $cor-amarela-estrela: #FFC107;
     }
 }
 
-// Mixin para Container Base (centralizar conteúdo)
+
 @mixin container-base {
     max-width: 1200px;
     margin: 0 auto;
@@ -93,17 +93,17 @@ a {
     transition: color 0.3s;
 }
 
-// Estilos de Botão
+
 .botao-primario, .botao-comecar { @include botao-primario-style; }
 .botao-doar { 
     @include botao-primario-style($padding: 1rem 2rem); 
-    img { filter: brightness(0) invert(1); width: 20px; height: 20px; } // Deixa o ícone branco
+    img { filter: brightness(0) invert(1); width: 20px; height: 20px; } 
 }
 .botao-adquirir { 
     @include botao-secundario-style($padding: 1rem 2rem); 
     color: $cor-secundaria; 
     border-color: $cor-secundaria;
-    img { width: 20px; height: 20px; } // Coração azul
+    img { width: 20px; height: 20px; } 
 }
 .botao-adquirir-produto { 
     @include botao-primario-style; 
@@ -127,7 +127,7 @@ main {
     }
 }
 
-/* --- Cabeçalho --- */
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -158,7 +158,7 @@ main {
     }
 }
 
-/* --- Seção Home (Início) --- */
+
 .inicio {
     display: flex;
     align-items: center;
@@ -176,7 +176,7 @@ main {
     }
 }
 
-/* --- Seção Estatísticas --- */
+
 .estatistica {
     background-color: $cor-branca;
     display: flex;
@@ -188,12 +188,12 @@ main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        img { max-width: 100px; margin-bottom: 0.5rem; } // Ajustado para as imagens de números
+        img { max-width: 100px; margin-bottom: 0.5rem; } 
         p { font-size: 1.25rem; color: $cor-subtitulo; font-weight: 400; }
     }
 }
 
-/* --- Seção Como Funciona --- */
+
 .como-funciona {
     text-align: center;
     > p { margin-bottom: 4rem; font-size: 1.25rem; color: $cor-subtitulo; }
@@ -216,20 +216,20 @@ main {
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            img { width: 28px; height: 28px; margin-right: 0.5rem; } // Ícone ao lado do título h3
+            img { width: 28px; height: 28px; margin-right: 0.5rem; } 
         }
         .descricao { margin-bottom: 2rem; font-size: 1rem; color: $cor-subtitulo; }
         .passos { display: flex; flex-direction: column; gap: 1.5rem; }
     }
     
-    // Cores de fundo específicas do design
-    .para-doadores { background-color: $cor-fundo-caixas; } // Verde Claro
-    .para-adquirente { background-color: $cor-branca; } // Branco
+    
+    .para-doadores { background-color: $cor-fundo-caixas; } 
+    .para-adquirente { background-color: $cor-branca; } 
 
-    // Layout para cada passo
+    
     .passo {
         display: grid;
-        grid-template-columns: 35px 1fr; // Coluna para o ícone (35px) e o conteúdo
+        grid-template-columns: 35px 1fr; 
         grid-template-rows: auto auto;
         gap: 0 1rem;
         align-items: flex-start;
@@ -245,7 +245,7 @@ main {
     }
 }
 
-/* --- Seção Produtos Disponíveis --- */
+
 .produtos {
     text-align: center;
     > p { margin-bottom: 3rem; font-size: 1.25rem; color: $cor-subtitulo; }
@@ -263,7 +263,7 @@ main {
         box-shadow: 0 4px 6px $cor-cinza-claro;
         flex: 1;
         max-width: 350px;
-        border: 2px solid $cor-primaria; // Borda verde sutil do design
+        border: 2px solid $cor-primaria; 
 
         img { width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; }
         h3 { font-size: 1.5rem; margin-bottom: 0.5rem; padding: 0 1.5rem; }
@@ -275,7 +275,7 @@ main {
     }
 }
 
-/* --- Seção Depoimentos --- */
+
 .depoimentos {
     text-align: center;
     background-color: $cor-fundo-principal;
@@ -313,10 +313,10 @@ main {
     }
 }
 
-/* --- Seção Chamada Final --- */
+
 .chamada-final {
     text-align: center;
-    background-color: $cor-fundo-caixas; // Fundo verde claro do design
+    background-color: $cor-fundo-caixas; 
     padding: 6rem 1.5rem;
     h2 { margin-bottom: 1rem; }
     p { margin-bottom: 2rem; font-size: 1.25rem; }
@@ -327,9 +327,9 @@ main {
     }
 }
 
-/* --- Rodapé --- */
+
 .rodape {
-    background-color: $cor-fundo-escuro; // Azul escuro do design
+    background-color: $cor-fundo-escuro; 
     color: $cor-branca;
     padding: 4rem 1.5rem 1.5rem;
     .conteudo-rodape {
@@ -355,7 +355,7 @@ main {
                     width: 32px; 
                     height: 32px; 
                     margin-right: 0.5rem; 
-                    filter: brightness(0) invert(1); // Deixa o ícone branco
+                    filter: brightness(0) invert(1); 
                 }
                 h3 { margin: 0; font-size: 1.5rem; }
             }
@@ -396,7 +396,7 @@ main {
     }
 }
 
-/* --- Media Queries (Responsividade) --- */
+
 @media (max-width: 1024px) {
     .inicio { flex-direction: column; text-align: center; .texto-inicio { max-width: 100%; } .imagem-reciclagem { max-width: 80%; } }
     .como-funciona .containers-funciona { flex-direction: column; }
